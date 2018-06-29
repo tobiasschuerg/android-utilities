@@ -1,0 +1,9 @@
+
+.gradle/
+
+.idea/caches
+.idea/libraries
+.idea/modules
+.idea/workspace.xml
+
+local.properties
