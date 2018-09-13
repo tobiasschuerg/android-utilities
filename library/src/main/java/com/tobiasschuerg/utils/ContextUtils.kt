@@ -18,9 +18,12 @@ fun Context.longToast(@StringRes text: Int) {
     longToast(getString(text))
 }
 
+/**
+ * @param default Default value if [ConnectivityManager] is not available.
+ */
 fun Context.isOnline(): Boolean {
-    val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    return connectivityManager.activeNetworkInfo.isConnected
+    val connectivityManager: ConnectivityManager? = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+    return connectivityManager?.activeNetworkInfo?.isConnected ?: false
 }
 
 /**
