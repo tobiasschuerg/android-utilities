@@ -2,7 +2,7 @@
 
 Provides utilities which I use in almost every project - now using Kotlin, mostly extension functions:
 
-### extension functions on context
+### extension functions on `Context`
 - `isOnline()` quickly check for an internet connection.
 - `longToast(message)` quickly toast something.
 - `startActivity(Activity::class)` start an activity without explicitely creating a new intent etc.
