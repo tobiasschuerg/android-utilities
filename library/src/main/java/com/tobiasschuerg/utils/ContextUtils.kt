@@ -4,9 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.annotation.StringRes
 import kotlin.reflect.KClass
 
 
@@ -19,7 +18,7 @@ fun Context.longToast(@StringRes text: Int) {
 }
 
 /**
- * @param default Default value if [ConnectivityManager] is not available.
+ * Checks if an internet connection is available.
  */
 fun Context.isOnline(): Boolean {
     val connectivityManager: ConnectivityManager? = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
@@ -34,8 +33,15 @@ fun <T : Activity> Context.startActivity(activity: KClass<T>) {
 }
 
 /**
+ * Directly start an [Activity] without any parameters.
+ */
+fun <T : Activity> Activity.startActivity(activity: KClass<T>) {
+    this.startActivity(Intent(this, activity.java))
+}
+
+/**
  * Directly start an [Activity] for result.
  */
-fun <T : Activity> AppCompatActivity.startActivityForResult(activity: KClass<T>, resultCode: Int) {
+fun <T : Activity> Activity.startActivityForResult(activity: KClass<T>, resultCode: Int) {
     this.startActivityForResult(Intent(this, activity.java), resultCode)
 }
