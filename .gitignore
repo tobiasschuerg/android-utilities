@@ -3,7 +3,10 @@
 
 .idea/caches
 .idea/libraries
-.idea/modules
 .idea/workspace.xml
+.idea/misc.xml
+.idea/modules.xml
+
+*.iml
 
 local.properties
