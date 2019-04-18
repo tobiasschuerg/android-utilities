@@ -20,4 +20,29 @@ sealed class Either<out L, out R> {
 
     inline fun <L, R, T> Either<L, R>.map(f: (R) -> T): Either<L, T> =
             flatMap { Right(f(it)) }
+
+    /**
+     * Returns the left value or throws an exception.
+     *
+     * @throws right value if [Throwable] or [NoSuchElementException]
+     * @see getRightValue
+     */
+    fun getLeftValue(): L {
+        when (this) {
+            is Left -> return value
+            is Right -> if (value is Throwable) throw value else throw NoSuchElementException()
+        }
+    }
+
+    /**
+     * Returns the left value or throws an exception.
+     *
+     * @throws right value if [Throwable] or [NoSuchElementException]
+     */
+    fun getRightValue(): R {
+        when (this) {
+            is Left -> if (value is Throwable) throw value else throw NoSuchElementException()
+            is Right -> return value
+        }
+    }
 }
