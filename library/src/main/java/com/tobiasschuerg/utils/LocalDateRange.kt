@@ -11,7 +11,7 @@ class LocalDateRange(override val start: LocalDate, override val endInclusive: L
             var current: LocalDate = start
 
             override fun hasNext(): Boolean {
-                return current.isBefore(endInclusive)
+                return current <= endInclusive
             }
 
             override fun next(): LocalDate {
