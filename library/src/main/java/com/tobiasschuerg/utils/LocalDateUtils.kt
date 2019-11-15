@@ -1,0 +1,50 @@
+package com.tobiasschuerg.utils
+
+import org.threeten.bp.DayOfWeek
+import org.threeten.bp.LocalDate
+import org.threeten.bp.temporal.WeekFields
+import java.util.Locale
+
+fun LocalDate.firstDayOfWeek(): LocalDate {
+    val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
+    return with(dayOfWeek, 1)
+}
+
+fun LocalDate.lastDayOfWeek(): LocalDate {
+    val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
+    return with(dayOfWeek, DayOfWeek.values().size.toLong())
+}
+
+fun LocalDate.atStartOfWeek(): LocalDate {
+    val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
+    return with(dayOfWeek, 1)
+}
+
+fun LocalDate.atEndOfWeek(): LocalDate {
+    val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
+    return with(dayOfWeek, 7)
+}
+
+fun LocalDate.atStartOfMonth(): LocalDate {
+    return withDayOfMonth(1)
+}
+
+fun LocalDate.atEndOfMonth(): LocalDate {
+    return withDayOfMonth(lengthOfMonth())
+}
+
+fun LocalDate.atStartOfQuarter(): LocalDate {
+    return withMonth((month.value - 1) / 3 * 3 + 1).atStartOfMonth()
+}
+
+fun LocalDate.atEndOfQuarter(): LocalDate {
+    return withMonth((month.value - 1) / 3 * 3 + 3).atEndOfMonth()
+}
+
+fun LocalDate.atStartOfYear(): LocalDate {
+    return withDayOfYear(1)
+}
+
+fun LocalDate.atEndOfYear(): LocalDate {
+    return withDayOfYear(lengthOfYear())
+}
