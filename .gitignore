@@ -12,3 +12,5 @@
 *.iml
 
 local.properties
+
+build
