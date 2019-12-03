@@ -1,9 +1,13 @@
-package com.tobiasschuerg.utils
+package com.tobiasschuerg.datetime
 
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
+import org.threeten.bp.ZoneOffset
 import org.threeten.bp.temporal.WeekFields
 import java.util.Locale
+
+
+fun LocalDate.toUtcMillis(): Long = atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
 
 fun LocalDate.firstDayOfWeek(): LocalDate {
     val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()

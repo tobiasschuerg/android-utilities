@@ -1,4 +1,4 @@
-package com.tobiasschuerg.utils
+package com.tobiasschuerg.datetime
 
 import org.threeten.bp.LocalDate
 
