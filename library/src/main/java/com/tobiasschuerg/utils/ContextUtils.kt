@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.annotation.StringRes
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlin.reflect.KClass
 
 
@@ -23,6 +25,13 @@ fun Context.longToast(@StringRes text: Int) {
 fun Context.isOnline(): Boolean {
     val connectivityManager: ConnectivityManager? = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
     return connectivityManager?.activeNetworkInfo?.isConnected ?: false
+}
+
+fun Context.isOnlineFlow(delayMillis: Long): Flow<Boolean> = flow {
+    while (true) {
+        emit(isOnline())
+        kotlinx.coroutines.delay(delayMillis)
+    }
 }
 
 /**
