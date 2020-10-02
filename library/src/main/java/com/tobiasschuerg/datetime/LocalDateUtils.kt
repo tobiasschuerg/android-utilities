@@ -6,7 +6,6 @@ import org.threeten.bp.ZoneOffset
 import org.threeten.bp.temporal.WeekFields
 import java.util.Locale
 
-
 fun LocalDate.toUtcMillis(): Long = atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
 
 fun LocalDate.firstDayOfWeek(): LocalDate {

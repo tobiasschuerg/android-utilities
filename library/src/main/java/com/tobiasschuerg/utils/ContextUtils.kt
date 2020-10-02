@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlin.reflect.KClass
 
-
 fun Context.longToast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 }

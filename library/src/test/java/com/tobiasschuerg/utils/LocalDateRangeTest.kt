@@ -11,7 +11,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.threeten.bp.LocalDate
 
-
 @RunWith(RobolectricTestRunner::class)
 class LocalDateRangeTest {
 
@@ -38,5 +37,4 @@ class LocalDateRangeTest {
         Assert.assertEquals(LocalDate.now(), range.first())
         Assert.assertEquals(LocalDate.now().plusDays(1), range.last())
     }
-
 }

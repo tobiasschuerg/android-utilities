@@ -2,8 +2,8 @@ package com.tobiasschuerg.datetime
 
 import org.threeten.bp.LocalDate
 
-class LocalDateRange(override val start: LocalDate, override val endInclusive: LocalDate)
-    : ClosedRange<LocalDate>, Iterable<LocalDate> {
+class LocalDateRange(override val start: LocalDate, override val endInclusive: LocalDate) :
+    ClosedRange<LocalDate>, Iterable<LocalDate> {
 
     override fun iterator(): Iterator<LocalDate> {
         return object : Iterator<LocalDate> {

@@ -10,16 +10,16 @@ sealed class Either<out L, out R> {
     class Right<out R>(val value: R) : Either<Nothing, R>()
 
     inline fun <L, R, T> Either<L, R>.fold(left: (L) -> T, right: (R) -> T): T =
-            when (this) {
-                is Left -> left(value)
-                is Right -> right(value)
-            }
+        when (this) {
+            is Left -> left(value)
+            is Right -> right(value)
+        }
 
     inline fun <L, R, T> Either<L, R>.flatMap(f: (R) -> Either<L, T>): Either<L, T> =
-            fold({ this as Left }, f)
+        fold({ this as Left }, f)
 
     inline fun <L, R, T> Either<L, R>.map(f: (R) -> T): Either<L, T> =
-            flatMap { Right(f(it)) }
+        flatMap { Right(f(it)) }
 
     /**
      * Returns the left value or throws an exception.
