@@ -3,7 +3,7 @@ package com.tobiasschuerg.monads
 /**
  * Created by Tobias Schürg on 13.03.2018.
  */
-
+@Deprecated("since Kotlin supports nullable flows (instead of rx) this is not needed anymore")
 sealed class Either<out L, out R> {
 
     class Left<out L>(val value: L) : Either<L, Nothing>()

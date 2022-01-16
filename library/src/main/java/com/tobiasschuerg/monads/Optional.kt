@@ -3,6 +3,7 @@ package com.tobiasschuerg.monads
 /**
  * Represents one optional value which can be there - or not.
  */
+@Deprecated("since Kotlin supports nullable flows (instead of rx) this is not needed anymore")
 sealed class Optional<out T> {
 
     abstract val value: T?

@@ -25,7 +25,7 @@ fun LocalDate.atStartOfWeek(): LocalDate {
 
 fun LocalDate.atEndOfWeek(): LocalDate {
     val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
-    return with(dayOfWeek, 7)
+    return with(dayOfWeek, DAYS_IN_A_WEEK)
 }
 
 fun LocalDate.atStartOfMonth(): LocalDate {
@@ -51,3 +51,5 @@ fun LocalDate.atStartOfYear(): LocalDate {
 fun LocalDate.atEndOfYear(): LocalDate {
     return withDayOfYear(lengthOfYear())
 }
+
+private val DAYS_IN_A_WEEK = 7L

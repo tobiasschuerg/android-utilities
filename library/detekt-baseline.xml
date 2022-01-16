@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>MagicNumber:LocalDateUtils.kt$3</ID>
+    <ID>MagicNumber:LocalDateUtils.kt$7L</ID>
+    <ID>MaxLineLength:ContextUtils.kt$val connectivityManager: ConnectivityManager? = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager</ID>
+    <ID>MayBeConst:LocalDateUtils.kt$private val DAYS_IN_A_WEEK = 7L</ID>
+    <ID>TooManyFunctions:LocalDateUtils.kt$com.tobiasschuerg.datetime.LocalDateUtils.kt</ID>
+    <ID>TooManyFunctions:SpannableUtils.kt$com.tobiasschuerg.spannable.SpannableUtils.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>
