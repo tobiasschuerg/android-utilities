@@ -20,7 +20,7 @@ class LocalDateRange(override val start: LocalDate, override val endInclusive: L
                     current = current.plusDays(1)
                     return next
                 } else {
-                    throw IndexOutOfBoundsException()
+                    throw NoSuchElementException("date range has no more next element")
                 }
             }
         }
