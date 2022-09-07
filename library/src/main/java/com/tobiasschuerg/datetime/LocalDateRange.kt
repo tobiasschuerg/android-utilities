@@ -3,8 +3,13 @@ package com.tobiasschuerg.datetime
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 
-class LocalDateRange(override val start: LocalDate, override val endInclusive: LocalDate) :
-    ClosedRange<LocalDate>, Iterable<LocalDate> {
+/**
+ * Range of two [LocalDate]s.
+ */
+class LocalDateRange(
+    override val start: LocalDate,
+    override val endInclusive: LocalDate
+) : ClosedRange<LocalDate>, Iterable<LocalDate> {
 
     init {
         require(!endInclusive.isBefore(start)) { "start date must not be after end date" }
