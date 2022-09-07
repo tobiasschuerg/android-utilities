@@ -1,9 +1,14 @@
 package com.tobiasschuerg.datetime
 
 import org.threeten.bp.LocalDate
+import org.threeten.bp.temporal.ChronoUnit
 
 class LocalDateRange(override val start: LocalDate, override val endInclusive: LocalDate) :
     ClosedRange<LocalDate>, Iterable<LocalDate> {
+
+    init {
+        require(!endInclusive.isBefore(start)) { "start date must not be after end date" }
+    }
 
     override fun iterator(): Iterator<LocalDate> {
         return object : Iterator<LocalDate> {
@@ -25,4 +30,9 @@ class LocalDateRange(override val start: LocalDate, override val endInclusive: L
             }
         }
     }
+
+    /**
+     * Number of day in this range.
+     */
+    fun getLength(): Long = ChronoUnit.DAYS.between(start, endInclusive) + 1
 }
