@@ -8,7 +8,6 @@ import java.time.LocalDateTime
  * Created by Tobias Schrg on 02.02.2024.
  */
 class LocalDateTimeUtilsKtTest {
-
     @Test
     fun `Given LocalDateTime, when converting to UTC millis, then result is correct`() {
         val dateTime = LocalDateTime.of(2020, 1, 1, 0, 0)
@@ -18,5 +17,4 @@ class LocalDateTimeUtilsKtTest {
 
         assertTrue(resultMillis == expectedMillis)
     }
-
 }

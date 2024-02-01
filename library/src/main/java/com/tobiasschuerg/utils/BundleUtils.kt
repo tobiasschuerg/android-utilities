@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.util.Log
 
 /**
- * Prints all contents of a [Bundle].
+ * Prints all contents of the provided [Bundle] to the log.
+ *
+ * @param logger A lambda function for logging the contents of the bundle. Defaults to using
+ * Android's Log.d with a default tag "[BundleDump]".
  */
-@JvmOverloads
-fun Bundle.dumpBundle(logger: (String) -> (Unit) = { it -> Log.d("[BundleDump]", it) }) {
-    val it = keySet().iterator()
-    logger(" == Dumping Intent - START ==")
-    while (it.hasNext()) {
-        val key = it.next()
+fun Bundle.dumpBundle(logger: (String) -> Unit = { message -> Log.d("[BundleDump]", message) }) {
+    logger("== Dumping Bundle - START ==")
+    for (key in keySet()) {
         logger("[$key=${get(key)}]")
     }
-    logger(" == Dumping Intent - END ==")
+    logger("== Dumping Bundle - END ==")
 }

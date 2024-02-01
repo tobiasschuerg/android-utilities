@@ -12,9 +12,8 @@ import java.time.temporal.ChronoUnit
  */
 class LocalDateRange(
     override val start: LocalDate,
-    override val endInclusive: LocalDate
+    override val endInclusive: LocalDate,
 ) : ClosedRange<LocalDate>, Iterable<LocalDate> {
-
     init {
         require(!endInclusive.isBefore(start)) { "Start date must not be after end date." }
     }

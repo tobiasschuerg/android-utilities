@@ -8,7 +8,6 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
 class LocalDateRangeTest {
-
     @Test
     fun `Given single day range, when counted, then size is 1`() {
         val today = LocalDate.now()
@@ -49,7 +48,8 @@ class LocalDateRangeTest {
         val end = LocalDate.MAX
         val range = LocalDateRange(start, end)
         // This assertion assumes the implementation can handle the entire LocalDate range.
-        // This is a theoretical test and might not be practical due to the vast range of LocalDate.MIN to LocalDate.MAX.
+        // This is a theoretical test and might not be practical
+        // due to the vast range of LocalDate.MIN to LocalDate.MAX.
         assertEquals(ChronoUnit.DAYS.between(start, end) + 1, range.getLength())
     }
 

@@ -1,7 +1,15 @@
 package com.tobiasschuerg.spannable
 
 import android.graphics.Typeface
-import android.text.style.*
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StrikethroughSpan
+import android.text.style.StyleSpan
+import android.text.style.SubscriptSpan
+import android.text.style.SuperscriptSpan
+import android.text.style.URLSpan
+import android.text.style.UnderlineSpan
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -9,8 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SpannableExtensionsTest {
-
+class SpannableUtilsKtTest {
     private val testString = "Test String"
 
     @Test

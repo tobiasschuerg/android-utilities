@@ -4,18 +4,18 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 
 /**
- * Executes a function once [EditorInfo.IME_ACTION_DONE] is triggered.
+ * Sets up an action to be performed when the IME_ACTION_DONE is triggered for this EditText.
+ * This is typically used for handling the "Done" button press on the soft keyboard.
  *
- * @see [EditorInfo.IME_ACTION_DONE]
+ * @param action The lambda function to execute when IME_ACTION_DONE is triggered.
  */
 fun EditText.doOnDone(action: () -> Unit) {
-    this.setOnEditorActionListener { _, actionId, _ ->
-        when (actionId) {
-            EditorInfo.IME_ACTION_DONE -> {
-                action()
-                true
-            }
-            else -> false
+    setOnEditorActionListener { _, actionId, _ ->
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            action.invoke() // Invoke the passed action
+            true // Return true to indicate that the action has been handled
+        } else {
+            false // Return false to let other listeners continue processing the event
         }
     }
 }

@@ -5,7 +5,6 @@ import org.junit.Test
 import java.time.LocalDate
 
 class LocalDateUtilsKtTest {
-
     @Test
     fun `test toUtcMillis conversion`() {
         val date = LocalDate.of(2020, 1, 1) // Example date.

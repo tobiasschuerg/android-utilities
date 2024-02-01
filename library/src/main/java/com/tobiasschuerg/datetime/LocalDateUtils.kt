@@ -1,6 +1,5 @@
 package com.tobiasschuerg.datetime
 
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.ZoneOffset
 import java.time.temporal.TemporalAdjusters

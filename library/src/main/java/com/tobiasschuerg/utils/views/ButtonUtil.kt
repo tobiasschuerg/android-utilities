@@ -3,9 +3,10 @@ package com.tobiasschuerg.utils.views
 import android.widget.Button
 
 /**
- * Calls the click listener only iff the button is enabled and clickable.
+ * Safely triggers the click event on this button only if it is both enabled and clickable.
  *
- * @see [Button.performClick]
+ * This function checks the button's [isEnabled] and [isClickable] properties before invoking
+ * [performClick], ensuring that the click action is only performed when the button is interactive.
  */
 fun Button.performCheckedClick() {
     if (isEnabled && isClickable) {
