@@ -21,3 +21,5 @@ build
 .idea/kotlinc.xml
 .idea/migrations.xml
 .idea/appInsightsSettings.xml
+.idea/androidTestResultsUserPreferences.xml
+.idea/deploymentTargetDropDown.xml
