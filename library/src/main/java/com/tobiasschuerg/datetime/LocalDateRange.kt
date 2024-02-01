@@ -1,7 +1,7 @@
 package com.tobiasschuerg.datetime
 
-import org.threeten.bp.LocalDate
-import org.threeten.bp.temporal.ChronoUnit
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 /**
  * Range of two [LocalDate]s.

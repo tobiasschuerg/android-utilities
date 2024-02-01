@@ -1,6 +1,6 @@
 package com.tobiasschuerg.datetime
 
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneOffset
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 fun LocalDateTime.toUtcMillis(): Long = toInstant(ZoneOffset.UTC).toEpochMilli()

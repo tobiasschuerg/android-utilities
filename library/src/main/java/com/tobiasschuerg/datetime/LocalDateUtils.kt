@@ -1,9 +1,9 @@
 package com.tobiasschuerg.datetime
 
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
-import org.threeten.bp.ZoneOffset
-import org.threeten.bp.temporal.WeekFields
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.ZoneOffset
+import java.time.temporal.WeekFields
 import java.util.Locale
 
 fun LocalDate.toUtcMillis(): Long = atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
