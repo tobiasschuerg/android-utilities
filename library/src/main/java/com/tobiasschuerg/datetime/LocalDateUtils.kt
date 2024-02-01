@@ -3,53 +3,76 @@ package com.tobiasschuerg.datetime
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.ZoneOffset
+import java.time.temporal.TemporalAdjusters
 import java.time.temporal.WeekFields
 import java.util.Locale
 
+/**
+ * Converts this [LocalDate] to the number of milliseconds from the epoch of 1970-01-01T00:00:00Z,
+ * assuming the start of this date in UTC.
+ *
+ * @return The number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
+ */
 fun LocalDate.toUtcMillis(): Long = atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
 
+/**
+ * Returns the first day of the week based on the system's default locale.
+ *
+ * @return The [LocalDate] representing the first day of the current week.
+ */
 fun LocalDate.firstDayOfWeek(): LocalDate {
-    val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
-    return with(dayOfWeek, 1)
+    val weekFields = WeekFields.of(Locale.getDefault())
+    return with(TemporalAdjusters.previousOrSame(weekFields.firstDayOfWeek))
 }
 
+/**
+ * Returns the last day of the week based on the system's default locale.
+ *
+ * @return The [LocalDate] representing the last day of the current week.
+ */
 fun LocalDate.lastDayOfWeek(): LocalDate {
-    val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
-    return with(dayOfWeek, DayOfWeek.values().size.toLong())
+    val weekFields = WeekFields.of(Locale.getDefault())
+    return with(TemporalAdjusters.nextOrSame(weekFields.firstDayOfWeek.minus(1)))
 }
 
-fun LocalDate.atStartOfWeek(): LocalDate {
-    val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
-    return with(dayOfWeek, 1)
-}
+/**
+ * Calculates the start of the month for this date.
+ *
+ * @return The [LocalDate] representing the first day of the current month.
+ */
+fun LocalDate.atStartOfMonth(): LocalDate = withDayOfMonth(1)
 
-fun LocalDate.atEndOfWeek(): LocalDate {
-    val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
-    return with(dayOfWeek, DAYS_IN_A_WEEK)
-}
+/**
+ * Calculates the end of the month for this date.
+ *
+ * @return The [LocalDate] representing the last day of the current month.
+ */
+fun LocalDate.atEndOfMonth(): LocalDate = withDayOfMonth(lengthOfMonth())
 
-fun LocalDate.atStartOfMonth(): LocalDate {
-    return withDayOfMonth(1)
-}
+/**
+ * Calculates the start of the quarter for this date.
+ *
+ * @return The [LocalDate] representing the first day of the current quarter.
+ */
+fun LocalDate.atStartOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3 + 1).atStartOfMonth()
 
-fun LocalDate.atEndOfMonth(): LocalDate {
-    return withDayOfMonth(lengthOfMonth())
-}
+/**
+ * Calculates the end of the quarter for this date.
+ *
+ * @return The [LocalDate] representing the last day of the current quarter.
+ */
+fun LocalDate.atEndOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3 + 3).atEndOfMonth()
 
-fun LocalDate.atStartOfQuarter(): LocalDate {
-    return withMonth((month.value - 1) / 3 * 3 + 1).atStartOfMonth()
-}
+/**
+ * Calculates the start of the year for this date.
+ *
+ * @return The [LocalDate] representing the first day of the year.
+ */
+fun LocalDate.atStartOfYear(): LocalDate = withDayOfYear(1)
 
-fun LocalDate.atEndOfQuarter(): LocalDate {
-    return withMonth((month.value - 1) / 3 * 3 + 3).atEndOfMonth()
-}
-
-fun LocalDate.atStartOfYear(): LocalDate {
-    return withDayOfYear(1)
-}
-
-fun LocalDate.atEndOfYear(): LocalDate {
-    return withDayOfYear(lengthOfYear())
-}
-
-private val DAYS_IN_A_WEEK = 7L
+/**
+ * Calculates the end of the year for this date.
+ *
+ * @return The [LocalDate] representing the last day of the year.
+ */
+fun LocalDate.atEndOfYear(): LocalDate = withDayOfYear(lengthOfYear())
