@@ -1,10 +1,18 @@
 package com.tobiasschuerg.datetime
 
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
+import java.util.Locale
 
 class LocalDateUtilsKtTest {
+    @Before
+    fun setup() {
+        // Set the default locale to a specific one expected by your tests
+        Locale.setDefault(Locale.GERMANY)
+    }
+
     @Test
     fun `test toUtcMillis conversion`() {
         val date = LocalDate.of(2020, 1, 1) // Example date.
