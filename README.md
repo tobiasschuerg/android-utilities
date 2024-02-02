@@ -1,29 +1,65 @@
 [![](https://jitpack.io/v/tobiasschuerg/android-utilities.svg)](https://jitpack.io/#tobiasschuerg/android-utilities)
 
-
 # Android Utilities
 
-Provides basic utilities which I use in almost every project - now using Kotlin, mostly extension functions:
+This library offers a collection of Kotlin-based utilities that streamline common Android development tasks. Utilizing mostly extension functions, it simplifies codebases across projects.
 
-### extension functions on `Context`
-- `hideKeyboard()` hides the soft keyboard.
-- `isOnline()` quickly check for an internet connection.
-- `longToast(message)` quickly toast something.
-- `startActivity(Activity::class)` start an activity without explicitely creating a new intent etc.
-- `startActivityForResult(Activity::class, code)` same as above but with a result code.
+## Features
 
-### extension function on `Bundle`
-- `dumpBundle()` writes everything (keys and values) of the bundle to Log.d or a custom logger.
+### Context Extensions
+- `hideKeyboard()`: Hides the soft keyboard if present.
+- `isOnline()`: Checks for an internet connection.
+- `longToast(message: String)`: Displays a long-duration toast message.
+- `longToast(@StringRes messageId: Int)`: Displays a long-duration toast with a string resource.
+- `startActivity(activityClass: KClass<out Activity>)`: Starts an activity with simplified intent creation.
+- `requestPermissions(permissions: Array<String>)`: Requests runtime permissions without a result code for streamlined permission handling.
 
-### extension function on `Button`
-- `performCheckedClick()` programmatically perform a button click, only off the button is actually clickable.
+### Bundle Extension
+- `dumpBundle(logger: (String) -> Unit = Log::d)`: Logs the contents of a `Bundle`, useful for debugging.
 
-### extension function on `EditText`
-- `doOnDone()` trigger an event if the 'done'-action is invoked.
+### Button Extension
+- `performCheckedClick()`: Performs a click action if the button is clickable and enabled.
 
+### EditText Extension (Assuming it's part of the utilities)
+- `doOnDone(action: () -> Unit)`: Executes an action when the 'Done' option is selected on the keyboard.
 
-## Get it from Jitpack:
-https://jitpack.io/#tobiasschuerg/android-utilities/
+## Installation - Get it from JitPack
+
+Add the library to your project via JitPack:
+
+```gradle
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.tobiasschuerg:android-utilities:latest.version.here'
+}
 ```
-implementation 'com.github.tobiasschuerg:android-utilities:+'
+Replace latest.version.here with the latest version number or commit hash to ensure you're using the most up-to-date release.
+
+For the latest version and details about how to include it in your project, visit:
+
+[JitPack - Android Utilities](https://jitpack.io/#tobiasschuerg/android-utilities)
+
+## Usage
+To use the extension functions, simply call them from any valid context. For example, to hide the keyboard from an activity:
+```kotlin
+hideKeyboard()
 ```
+Or, to check for an internet connection:
+
+```kotlin
+if (isOnline()) {
+    // Handle online state
+} else {
+    // Handle offline state
+}
+```
+For more detailed examples and advanced usage, refer to the comments in the source code.
+
+## Contributing
+Contributions are welcome!
+
+## License
+This library is available under the MIT license. See the LICENSE file for more info.
