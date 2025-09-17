@@ -1,5 +1,6 @@
 package com.tobiasschuerg.datetime
 
+import android.annotation.SuppressLint
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -10,6 +11,7 @@ import java.time.temporal.ChronoUnit
  * @property start The start date of the range.
  * @property endInclusive The end date of the range, inclusive.
  */
+@SuppressLint("NewApi")
 class LocalDateRange(
     override val start: LocalDate,
     override val endInclusive: LocalDate,

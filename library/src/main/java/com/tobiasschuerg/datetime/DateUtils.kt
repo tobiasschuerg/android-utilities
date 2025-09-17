@@ -1,5 +1,6 @@
 package com.tobiasschuerg.datetime
 
+import android.annotation.SuppressLint
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Calendar
@@ -12,6 +13,7 @@ object DateUtils {
      * @param localDate The LocalDate to convert.
      * @return A Date representing the start of the LocalDate in the system's default timezone.
      */
+    @SuppressLint("NewApi")
     @Deprecated(
         "Use Java Time API's ZonedDateTime or Instant for modern time handling.",
         level = DeprecationLevel.WARNING,
@@ -45,6 +47,7 @@ object DateUtils {
  * @param date The Date to convert.
  * @return A LocalDate representing the date in the system's default timezone.
  */
+@SuppressLint("NewApi")
 @Deprecated(
     "Use java.time.Instant and ZonedDateTime for modern time handling.",
     level = DeprecationLevel.WARNING,

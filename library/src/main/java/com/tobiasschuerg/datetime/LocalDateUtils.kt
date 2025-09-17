@@ -1,5 +1,6 @@
 package com.tobiasschuerg.datetime
 
+import android.annotation.SuppressLint
 import java.time.LocalDate
 import java.time.ZoneOffset
 import java.time.temporal.TemporalAdjusters
@@ -12,6 +13,7 @@ import java.util.Locale
  *
  * @return The number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
  */
+@SuppressLint("NewApi")
 fun LocalDate.toUtcMillis(): Long = atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
 
 /**
@@ -19,6 +21,7 @@ fun LocalDate.toUtcMillis(): Long = atStartOfDay(ZoneOffset.UTC).toInstant().toE
  *
  * @return The [LocalDate] representing the first day of the current week.
  */
+@SuppressLint("NewApi")
 fun LocalDate.firstDayOfWeek(): LocalDate {
     val weekFields = WeekFields.of(Locale.getDefault())
     return with(TemporalAdjusters.previousOrSame(weekFields.firstDayOfWeek))
@@ -29,6 +32,7 @@ fun LocalDate.firstDayOfWeek(): LocalDate {
  *
  * @return The [LocalDate] representing the last day of the current week.
  */
+@SuppressLint("NewApi")
 fun LocalDate.lastDayOfWeek(): LocalDate {
     val weekFields = WeekFields.of(Locale.getDefault())
     return with(TemporalAdjusters.nextOrSame(weekFields.firstDayOfWeek.minus(1)))
@@ -39,6 +43,7 @@ fun LocalDate.lastDayOfWeek(): LocalDate {
  *
  * @return The [LocalDate] representing the first day of the current month.
  */
+@SuppressLint("NewApi")
 fun LocalDate.atStartOfMonth(): LocalDate = withDayOfMonth(1)
 
 /**
@@ -46,6 +51,7 @@ fun LocalDate.atStartOfMonth(): LocalDate = withDayOfMonth(1)
  *
  * @return The [LocalDate] representing the last day of the current month.
  */
+@SuppressLint("NewApi")
 fun LocalDate.atEndOfMonth(): LocalDate = withDayOfMonth(lengthOfMonth())
 
 /**
@@ -53,6 +59,7 @@ fun LocalDate.atEndOfMonth(): LocalDate = withDayOfMonth(lengthOfMonth())
  *
  * @return The [LocalDate] representing the first day of the current quarter.
  */
+@SuppressLint("NewApi")
 fun LocalDate.atStartOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3 + 1).atStartOfMonth()
 
 /**
@@ -60,6 +67,7 @@ fun LocalDate.atStartOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3
  *
  * @return The [LocalDate] representing the last day of the current quarter.
  */
+@SuppressLint("NewApi")
 fun LocalDate.atEndOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3 + 3).atEndOfMonth()
 
 /**
@@ -67,6 +75,7 @@ fun LocalDate.atEndOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3 +
  *
  * @return The [LocalDate] representing the first day of the year.
  */
+@SuppressLint("NewApi")
 fun LocalDate.atStartOfYear(): LocalDate = withDayOfYear(1)
 
 /**
@@ -74,4 +83,5 @@ fun LocalDate.atStartOfYear(): LocalDate = withDayOfYear(1)
  *
  * @return The [LocalDate] representing the last day of the year.
  */
+@SuppressLint("NewApi")
 fun LocalDate.atEndOfYear(): LocalDate = withDayOfYear(lengthOfYear())
