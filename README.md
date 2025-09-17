@@ -74,6 +74,8 @@ if (isOnline()) {
 
 For more detailed examples and advanced usage, refer to the comments in the source code.
 
+**Important Note:** This library uses Java 8+ APIs. To ensure compatibility with all Android versions, you must enable core library desugaring in your app. For more information, see the [official Android documentation](https://developer.android.com/studio/write/java8-support#library-desugaring).
+
 ## Contributing
 
 Contributions are welcome!
