@@ -23,3 +23,5 @@ build
 .idea/appInsightsSettings.xml
 .idea/androidTestResultsUserPreferences.xml
 .idea/deploymentTargetDropDown.xml
+.idea/studiobot.xml
+.idea/AndroidProjectSystem.xml
