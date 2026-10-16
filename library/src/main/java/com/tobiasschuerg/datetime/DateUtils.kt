@@ -19,9 +19,8 @@ object DateUtils {
         level = DeprecationLevel.WARNING,
     )
     @JvmStatic
-    fun localDateToDate(localDate: LocalDate): Date {
-        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
-    }
+    fun localDateToDate(localDate: LocalDate): Date =
+        Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
 
     /**
      * Converts a java.util.Date to the number of epoch days.

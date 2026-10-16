@@ -1,0 +1,29 @@
+[versions]
+agp = "9.4.1"
+kotlin = "2.4.21"
+coroutines = "1.11.0"
+androidx-core = "1.19.1"
+androidx-annotation = "1.11.0"
+androidx-test-core = "1.7.0"
+androidx-test-ext-junit = "1.3.0"
+androidx-test-runner = "1.7.0"
+androidx-test-rules = "1.7.0"
+junit = "4.13.2"
+detekt = "1.23.8"
+ktlint-gradle = "14.2.0"
+
+[libraries]
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+androidx-core = { module = "androidx.core:core", version.ref = "androidx-core" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidx-annotation" }
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core" }
+androidx-test-ext-junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidx-test-ext-junit" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner" }
+androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test-rules" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
