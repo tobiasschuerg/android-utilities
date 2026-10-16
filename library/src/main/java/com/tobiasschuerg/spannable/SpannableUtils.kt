@@ -14,6 +14,7 @@ import android.text.style.SubscriptSpan
 import android.text.style.SuperscriptSpan
 import android.text.style.URLSpan
 import android.text.style.UnderlineSpan
+import androidx.annotation.ColorInt
 
 /**
  * Creates a new [SpannableString] based on the DSL provided in [func].
@@ -65,12 +66,12 @@ fun size(
 ): SpannableString = span(s, RelativeSizeSpan(size))
 
 fun color(
-    color: Int,
+    @ColorInt color: Int,
     s: CharSequence,
 ): SpannableString = span(s, ForegroundColorSpan(color))
 
 fun background(
-    color: Int,
+    @ColorInt color: Int,
     s: CharSequence,
 ): SpannableString = span(s, BackgroundColorSpan(color))
 

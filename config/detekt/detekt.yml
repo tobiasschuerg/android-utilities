@@ -1,0 +1,5 @@
+# Overrides on top of detekt's default configuration (buildUponDefaultConfig = true).
+complexity:
+  TooManyFunctions:
+    # Utility files intentionally group many small top-level extension functions.
+    thresholdInFiles: 25

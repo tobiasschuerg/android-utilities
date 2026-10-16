@@ -7,6 +7,8 @@ import java.time.temporal.TemporalAdjusters
 import java.time.temporal.WeekFields
 import java.util.Locale
 
+private const val MONTHS_PER_QUARTER = 3
+
 /**
  * Converts this [LocalDate] to the number of milliseconds from the epoch of 1970-01-01T00:00:00Z,
  * assuming the start of this date in UTC.
@@ -60,7 +62,7 @@ fun LocalDate.atEndOfMonth(): LocalDate = withDayOfMonth(lengthOfMonth())
  * @return The [LocalDate] representing the first day of the current quarter.
  */
 @SuppressLint("NewApi")
-fun LocalDate.atStartOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3 + 1).atStartOfMonth()
+fun LocalDate.atStartOfQuarter(): LocalDate = withMonth(firstMonthOfQuarter()).atStartOfMonth()
 
 /**
  * Calculates the end of the quarter for this date.
@@ -68,7 +70,7 @@ fun LocalDate.atStartOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3
  * @return The [LocalDate] representing the last day of the current quarter.
  */
 @SuppressLint("NewApi")
-fun LocalDate.atEndOfQuarter(): LocalDate = withMonth((monthValue - 1) / 3 * 3 + 3).atEndOfMonth()
+fun LocalDate.atEndOfQuarter(): LocalDate = withMonth(firstMonthOfQuarter() + MONTHS_PER_QUARTER - 1).atEndOfMonth()
 
 /**
  * Calculates the start of the year for this date.
@@ -85,3 +87,6 @@ fun LocalDate.atStartOfYear(): LocalDate = withDayOfYear(1)
  */
 @SuppressLint("NewApi")
 fun LocalDate.atEndOfYear(): LocalDate = withDayOfYear(lengthOfYear())
+
+@SuppressLint("NewApi")
+private fun LocalDate.firstMonthOfQuarter(): Int = (monthValue - 1) / MONTHS_PER_QUARTER * MONTHS_PER_QUARTER + 1
