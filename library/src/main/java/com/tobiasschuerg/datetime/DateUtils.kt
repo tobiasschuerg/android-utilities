@@ -25,7 +25,7 @@ object DateUtils {
     /**
      * Converts a java.util.Date to the number of epoch days.
      * @param date The Date to convert.
-     * @return The number of days since the epoch (1970-01-01) for the Date's midnight in UTC.
+     * @return The epoch day (days since 1970-01-01) of the Date's calendar day in the system's default timezone.
      */
     @Deprecated(
         "Consider using LocalDate.toEpochDay() for modern date handling.",
@@ -37,7 +37,8 @@ object DateUtils {
         calendar.time = date
         val offset = calendar[Calendar.ZONE_OFFSET] + calendar[Calendar.DST_OFFSET]
         val utcMillis = calendar.timeInMillis + offset
-        return TimeUnit.MILLISECONDS.toDays(utcMillis)
+        // floorDiv instead of TimeUnit.toDays so dates before 1970 are not rounded towards zero
+        return utcMillis.floorDiv(TimeUnit.DAYS.toMillis(1))
     }
 }
 

@@ -12,7 +12,10 @@ import android.util.Log
 fun Bundle.dumpBundle(logger: (String) -> Unit = { message -> Log.d("[BundleDump]", message) }) {
     logger("== Dumping Bundle - START ==")
     for (key in keySet()) {
-        logger("[$key=${get(key)}]")
+        // There is no non-deprecated way to read a value of unknown type from a Bundle.
+        @Suppress("DEPRECATION")
+        val value = get(key)
+        logger("[$key=$value]")
     }
     logger("== Dumping Bundle - END ==")
 }

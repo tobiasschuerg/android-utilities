@@ -1,6 +1,5 @@
-package com.tobiasschuerg.utils
+package com.tobiasschuerg.datetime
 
-import com.tobiasschuerg.datetime.LocalDateRange
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -98,5 +97,28 @@ class LocalDateRangeTest {
             dates.add(date)
         }
         assertEquals(6, dates.size)
+    }
+
+    @Test
+    fun `Given range ending at LocalDate MAX, when iterated, then does not overflow`() {
+        val range = LocalDateRange(LocalDate.MAX.minusDays(1), LocalDate.MAX)
+        assertEquals(listOf(LocalDate.MAX.minusDays(1), LocalDate.MAX), range.toList())
+    }
+
+    @Test(expected = NoSuchElementException::class)
+    fun `Given exhausted iterator, when next is called, then exception is thrown`() {
+        val today = LocalDate.now()
+        val iterator = LocalDateRange(today, today).iterator()
+        iterator.next()
+        iterator.next()
+    }
+
+    @Test
+    fun `Given two ranges with same bounds, when compared, then they are equal`() {
+        val start = LocalDate.of(2024, 1, 1)
+        val end = LocalDate.of(2024, 1, 31)
+        assertEquals(LocalDateRange(start, end), LocalDateRange(start, end))
+        assertEquals(LocalDateRange(start, end).hashCode(), LocalDateRange(start, end).hashCode())
+        assertEquals("2024-01-01..2024-01-31", LocalDateRange(start, end).toString())
     }
 }

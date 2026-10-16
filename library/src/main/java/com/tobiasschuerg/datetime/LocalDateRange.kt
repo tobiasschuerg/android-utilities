@@ -21,20 +21,19 @@ class LocalDateRange(
         require(!endInclusive.isBefore(start)) { "Start date must not be after end date." }
     }
 
-    override fun iterator(): Iterator<LocalDate> {
-        return object : Iterator<LocalDate> {
-            var current: LocalDate = start
+    override fun iterator(): Iterator<LocalDate> =
+        object : Iterator<LocalDate> {
+            // null once endInclusive has been returned; avoids overflowing past LocalDate.MAX
+            private var next: LocalDate? = start
 
-            override fun hasNext(): Boolean = current <= endInclusive
+            override fun hasNext(): Boolean = next != null
 
             override fun next(): LocalDate {
-                if (!hasNext()) throw NoSuchElementException("Date range has no more elements.")
-                return current.apply {
-                    current = this.plusDays(1)
-                }
+                val current = next ?: throw NoSuchElementException("Date range has no more elements.")
+                next = if (current < endInclusive) current.plusDays(1) else null
+                return current
             }
         }
-    }
 
     /**
      * Calculates the total number of days within the range, including both the start and end dates.
@@ -42,4 +41,11 @@ class LocalDateRange(
      * @return The total number of days as a Long.
      */
     fun getLength(): Long = ChronoUnit.DAYS.between(start, endInclusive) + 1
+
+    override fun equals(other: Any?): Boolean =
+        other is LocalDateRange && start == other.start && endInclusive == other.endInclusive
+
+    override fun hashCode(): Int = 31 * start.hashCode() + endInclusive.hashCode()
+
+    override fun toString(): String = "$start..$endInclusive"
 }

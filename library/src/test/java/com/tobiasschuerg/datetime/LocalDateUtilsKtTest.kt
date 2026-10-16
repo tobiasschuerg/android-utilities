@@ -1,5 +1,6 @@
 package com.tobiasschuerg.datetime
 
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -7,10 +8,39 @@ import java.time.LocalDate
 import java.util.Locale
 
 class LocalDateUtilsKtTest {
+    private lateinit var originalLocale: Locale
+
     @Before
     fun setup() {
         // Set the default locale to a specific one expected by your tests
+        originalLocale = Locale.getDefault()
         Locale.setDefault(Locale.GERMANY)
+    }
+
+    @After
+    fun tearDown() {
+        Locale.setDefault(originalLocale)
+    }
+
+    @Test
+    fun `test week bounds for locale starting on sunday`() {
+        Locale.setDefault(Locale.US)
+        val date = LocalDate.of(2021, 8, 4) // Wednesday
+        assertEquals(LocalDate.of(2021, 8, 1), date.firstDayOfWeek())
+        assertEquals(LocalDate.of(2021, 8, 7), date.lastDayOfWeek())
+    }
+
+    @Test
+    fun `test quarter bounds for every month`() {
+        for (month in 1..12) {
+            val date = LocalDate.of(2021, month, 15)
+            val quarterStartMonth = (month - 1) / 3 * 3 + 1
+            assertEquals(LocalDate.of(2021, quarterStartMonth, 1), date.atStartOfQuarter())
+            assertEquals(
+                LocalDate.of(2021, quarterStartMonth + 2, 1).atEndOfMonth(),
+                date.atEndOfQuarter(),
+            )
+        }
     }
 
     @Test
