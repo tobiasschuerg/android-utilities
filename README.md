@@ -7,51 +7,80 @@ development tasks. Utilizing mostly extension functions, it simplifies codebases
 
 ## Features
 
-### Context Extensions
+### Context Extensions (`com.tobiasschuerg.utils`)
 
-- `hideKeyboard()`: Hides the soft keyboard if present.
-- `isOnline()`: Checks for an internet connection.
-- `longToast(message: String)`: Displays a long-duration toast message.
-- `longToast(@StringRes messageId: Int)`: Displays a long-duration toast with a string resource.
-- `startActivity(activityClass: KClass<out Activity>)`: Starts an activity with simplified intent
-  creation.
-- `requestPermissions(permissions: Array<String>)`: Requests runtime permissions without a result
-  code for streamlined permission handling.
+- `Context.longToast(text: String)` / `Context.longToast(@StringRes text: Int)`: Displays a long-duration toast.
+- `Context.isOnline()`: Checks whether the active network has validated internet access.
+- `Context.onlineStatusFlow()`: Cold `Flow<Boolean>` emitting the connectivity status and every change of it,
+  backed by a `ConnectivityManager.NetworkCallback`.
+- `Context.isOnlineFlow(delayMillis: Long)`: Polling variant of `onlineStatusFlow()`.
+- `Context.startActivity(activity: KClass<T>)`: Starts an activity without building the intent manually.
+- `Activity.startActivityForResult(activity: KClass<T>, requestCode: Int)`
+- `Activity.hideKeyboard()` / `Context.hideKeyboard(focusView: View)`: Hides the soft keyboard.
+
+The connectivity helpers require the `android.permission.ACCESS_NETWORK_STATE` permission.
+
+### Permissions (`PermissionUtil`)
+
+- `Context.hasPermissions(vararg permissions: String)`: Checks whether all given permissions are granted.
+- `Activity.requestPermissions(permissions: Array<String>)`: Requests permissions with a fixed request code.
 
 ### Bundle Extension
 
-- `dumpBundle(logger: (String) -> Unit = Log::d)`: Logs the contents of a `Bundle`, useful for
-  debugging.
+- `Bundle.dumpBundle(logger: (String) -> Unit = ...)`: Logs the contents of a `Bundle`, useful for debugging.
 
-### Button Extension
+### View Extensions (`com.tobiasschuerg.utils.views`)
 
-- `performCheckedClick()`: Performs a click action if the button is clickable and enabled.
+- `Button.performCheckedClick()`: Performs a click only if the button is clickable and enabled.
+- `EditText.doOnDone(action: () -> Unit)`: Executes an action when the IME 'Done' action is triggered.
 
-### EditText Extension (Assuming it's part of the utilities)
+### Spannable DSL (`com.tobiasschuerg.spannable`)
 
-- `doOnDone(action: () -> Unit)`: Executes an action when the 'Done' option is selected on the
-  keyboard.
-
-## Installation - Get it from JitPack
-
-Add the library to your project via JitPack:
-
-```gradle
-repositories {
-    maven { url 'https://jitpack.io' }
-}
-
-dependencies {
-    implementation 'com.github.tobiasschuerg:android-utilities:latest.version.here'
+```kotlin
+val text = spannable {
+    append(bold("Bold"))
+    append(" and ")
+    append(color(Color.RED, italic("red italic")))
 }
 ```
 
-Replace latest.version.here with the latest version number or commit hash to ensure you're using the
-most up-to-date release.
+Available spans: `bold`, `italic`, `underline`, `strike`, `sup`, `sub`, `size`, `color`, `background`, `url`.
 
-For the latest version and details about how to include it in your project, visit:
+### Date & Time (`com.tobiasschuerg.datetime`)
 
-[JitPack - Android Utilities](https://jitpack.io/#tobiasschuerg/android-utilities)
+- `LocalDateRange(start, endInclusive)`: An iterable, inclusive range of `LocalDate`s.
+- `LocalDate.atStartOfMonth()`, `atEndOfMonth()`, `atStartOfQuarter()`, `atEndOfQuarter()`,
+  `atStartOfYear()`, `atEndOfYear()`
+- `LocalDate.firstDayOfWeek()` / `lastDayOfWeek()`: Based on the default locale.
+- `LocalDate.toUtcMillis()` / `LocalDateTime.toUtcMillis()`
+- `LocalTime.totalMinutesSinceMidnight()`
+- `TimeConstants`: Common time unit constants.
+
+## Installation - Get it from JitPack
+
+Add the JitPack repository to your `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://jitpack.io")
+    }
+}
+```
+
+Then add the dependency:
+
+```kotlin
+dependencies {
+    implementation("com.github.tobiasschuerg:android-utilities:<version>")
+}
+```
+
+Replace `<version>` with the latest release shown in the badge above, or a commit hash.
+
+For details, visit [JitPack - Android Utilities](https://jitpack.io/#tobiasschuerg/android-utilities).
 
 ## Usage
 
@@ -62,23 +91,24 @@ keyboard from an activity:
 hideKeyboard()
 ```
 
-Or, to check for an internet connection:
+Or, to react to connectivity changes:
 
 ```kotlin
-if (isOnline()) {
-    // Handle online state
-} else {
-    // Handle offline state
+lifecycleScope.launch {
+    onlineStatusFlow().collect { online ->
+        // Handle online / offline state
+    }
 }
 ```
 
-For more detailed examples and advanced usage, refer to the comments in the source code.
-
-**Important Note:** This library uses Java 8+ APIs. To ensure compatibility with all Android versions, you must enable core library desugaring in your app. For more information, see the [official Android documentation](https://developer.android.com/studio/write/java8-support#library-desugaring).
+**Important Note:** This library uses `java.time` APIs and has a `minSdk` of 21. On devices below API 26 you must
+enable core library desugaring in your app. For more information, see the
+[official Android documentation](https://developer.android.com/studio/write/java8-support#library-desugaring).
 
 ## Contributing
 
-Contributions are welcome!
+Contributions are welcome! Run `./gradlew build` before opening a pull request; it runs lint, ktlint, detekt
+and the unit tests.
 
 ## License
 
